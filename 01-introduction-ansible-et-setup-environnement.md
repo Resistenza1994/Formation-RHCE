@@ -106,7 +106,7 @@ become=true
 ssh ansible@target-node1
 ```
 
-### 5. tester la connexion ansible
+### 8. tester la connexion ansible
 ```bash
 ansible target-node1 -m ping
 ```
