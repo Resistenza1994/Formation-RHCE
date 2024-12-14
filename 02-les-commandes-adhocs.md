@@ -38,60 +38,55 @@ ansible all -m ping
 Ce module exécute des commandes sur les hôtes cibles. Contrairement au module shell, il n'interprète pas les caractères spéciaux comme les redirections (>, |, etc.).
 ``` bash
 ansible all -m command -a "ls -l /etc" 
-``` 
+```  
 
-3. Module `shell`
-Ce module exécute des commandes dans le shell de l'hôte cible, permettant l'utilisation de caractères spéciaux et de redirections
-``` bash
-ansible all -m shell -a "echo $HOME > homes_directory" 
-``` 
-
-4. Module `copy`
+3. Module `copy`
 Ce module copie des fichiers de la machine de contrôle Ansible vers les hôtes cibles.
 ``` bash
 ansible all -m copy -a "src=/path/to/local/file dest=/path/to/remote/destination" 
 ```
 
-5. Module `file`
+4. Module `file`
 Ce module gère les fichiers et répertoires sur les hôtes cibles, permettant la création, la suppression et la modification des permissions.  
 exemple: ajouter un répertoire.
 ``` bash
 ansible all -m file -a "path=/path/to/directory state=directory"
 ```
 
-6. Module `lineinfile`
+5. Module `lineinfile`
 ajouter, supprimer ou modifier des lignes sans affecter le reste du contenu.
 exemple: ajouter une ligne.
 ``` bash
 ansible all -i inventory -m lineinfile -a "path=/etc/fstab line='/dev/sdb1 /mnt/data ext4 defaults 0 0'"
 ```
 
-7. Module `yum`
+6. Module `yum`
 Ce module gère les packages sur les systèmes basés sur Red Hat (utilisant yum).
 exemple: installer un package
 ``` bash
 ansible all -m yum -a "name=httpd state=present" 
 ```
 
-8. Module `service`
+7. Module `service`
 Ce module gère les services sur les hôtes cibles.
 example: restart le service
 ``` bash
 ansible all -m service -a "name=httpd state=restarted" 
 ```
 
-9. Module `group`
+8. Module `group`
 Le module group permet de gérer les groupes sur les hôtes cibles.
 exemple: ajouter un groupe
 ``` bash
 ansible all -m group -a "name=developers  gid=2002 state=present" 
 ```
 
-10. Module `user`
+9. Module `user`
 exemple: ajouter un utilisateur
 ``` bash
 ansible all -m user -a "name=developer uid=2001 state=present"
 ```
+
 
 ### LAB 01
 #### Q0. Exécutez une commande ad hoc pour ajouter un utilisateur nommé « lisa » puis observez la sortie de la commande en utilisant la commande ad-hoc
@@ -130,6 +125,7 @@ ansible all -m command -a "rpm -q httpd"
 ```
 
 #### Q5. Démarrez et activez maintenant le service httpd dans la machine hôte
+
 ```bash
 ansible target-node1 -m service -a "name=httpd state=started enabled=yes"
 
@@ -148,9 +144,10 @@ ansible all -m lineinfile -a "path=/etc/hosts line='192.168.1.100 newhost' state
 
 ```
 
-#### Q8. Utilisez le module copy pour copier un fichier nommé index.html depuis la machine de contrôle vers le répertoire /var/www/html/ sur la machine target-node2.
+#### Q8. Utilisez le module copy pour copier un fichier nommé exemple.txt depuis la machine de contrôle vers le répertoire /tmp sur la machine target-node2.
+
 ```bash
-ansible target-node2 -m copy -a "src=/index.html dest=/var/www/html/"
+ansible target-node2 -m copy -a "src=/exemple.txt dest=/tmp"
 
 ```
 
@@ -161,14 +158,7 @@ ansible all -m file -a "path=/backup state=directory mode=0755 owner=root group=
 
 ```
 
-#### Q10. Ajoutez une ligne pour configurer le serveur SSH afin d'autoriser l'authentification par mot de passe dans le fichier /etc/ssh/sshd_config.
-
-```bash
-ansible all -m lineinfile -a "path=/etc/ssh/sshd_config line='PasswordAuthentication yes' state=present"
-
-```
-
-#### Q11. Supprimez la ligne contenant l'adresse 192.168.1.100 dans /etc/hosts.
+#### Q10. Supprimez la ligne contenant l'adresse 192.168.1.100 dans /etc/hosts.
 
 ```bash
 ansible all -m lineinfile -a "path=/etc/hosts regexp='^192.168.1.100' state=absent"
