@@ -56,7 +56,6 @@ yum install python3
 ```bash
 
 yum install ansible-core
-
 ```
 
 ### 3. ajouter et configurer le 'remote user' sous les 3 machines.
