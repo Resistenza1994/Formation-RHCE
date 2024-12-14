@@ -11,27 +11,21 @@
 ### Commandes Ansible Vault
 
 ```bash
-
 ansible-vault --help
-
 ```
   
 
 Créer un nouveau fichier chiffré avec Ansible Vault:
 
 ```bash
-
 ansible-vault create protected_file.yml
-
 ```
 
 Après avoir exécuté cette commande, vous serez invité à entrer un mot de passe. Ce mot de passe sera utilisé pour chiffrer le fichier. Une fois le fichier créé, vous pouvez le consulter pour vérifier qu'il est bien chiffré.
 
 
 ```bash
-
 cat protected_file.yml
-
 ```
 
   
@@ -39,9 +33,7 @@ cat protected_file.yml
 Visualiser le contenu d'un fichier chiffré sans le modifier :
 
 ```bash
-
 ansible-vault view protected_file.yml
-
 ```
 
 Vous serez invité à entrer le mot de passe pour déchiffrer et afficher le contenu du fichier.
@@ -51,9 +43,7 @@ Vous serez invité à entrer le mot de passe pour déchiffrer et afficher le con
 Editer un fichier chiffré :
 
 ```bash
-
 ansible-vault edit protected_file.yml
-
 ```
 
 Vous serez invité à entrer le mot de passe, puis le fichier s'ouvrira dans votre éditeur de texte par défaut.
@@ -63,9 +53,7 @@ Vous serez invité à entrer le mot de passe, puis le fichier s'ouvrira dans vot
 Changer le mot de passe d'un fichier chiffré :
 
 ```bash
-
 ansible-vault rekey protected_file.yml
-
 ```
 
 Vous serez invité à entrer l'ancien mot de passe, puis un nouveau mot de passe.
@@ -75,9 +63,7 @@ Vous serez invité à entrer l'ancien mot de passe, puis un nouveau mot de passe
 Chiffrer un fichier existant :
 
 ```bash
-
 ansible-vault encrypt_file /var/exemple.yml
-
 ```
 
 
@@ -89,9 +75,7 @@ Pour exécuter un playbook contenant des fichiers chiffrés, vous pouvez utilise
 Cette option vous invite à entrer le mot de passe pour déchiffrer le fichier.
 
 ```bash
-
 ansible-playbook playbook.yml --ask-vault-password
-
 ```
 
 
@@ -99,9 +83,7 @@ ansible-playbook playbook.yml --ask-vault-password
 Cette option utilise un fichier contenant le mot de passe pour déchiffrer le fichier.
 
 ```bash
-
 ansible-playbook playbook.yml --vault-password-file vault_password
-
 ```
 
 
@@ -115,37 +97,26 @@ Exemple:
 3. Écrivez un playbook Ansible qui utilise ces deux fichiers pour créer un utilisateur avec le nom d'utilisateur et le mot de passe spécifiés.
 
 ```bash
-
 ansible-vault create password.yml
-
 ```
 
 ```bash
-
 password: "pass123"
-
 ```
 
 ```bash
-
 vim user.yml
-
 ```
 
 ```bash
-
 username: "alice"
-
 ```
 
 ```bash
-
 vim playbook.yml
-
 ```
 
 ```bash
-
 - name: Créer un utilisateur avec un mot de passe chiffré
   hosts: all
   vars_files:
@@ -157,13 +128,10 @@ vim playbook.yml
       name: "{{ username }}"
       password: "{{ password | password_hash('sha512') }}"
       state: present
-
 ```
 
 ```bash
-
 ansible-playbook create_user.yml --ask-vault-password
-
 ```
 
 RQ: `{{ password | password_hash('sha512') }}` permet de s'assurer que le mot de passe stocké et utilisé dans le système sécurisé et haché, plutôt que de stocker et utiliser le mot de passe en clair. 
