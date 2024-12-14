@@ -46,9 +46,7 @@ Avant de commencer, assurez-vous d'avoir :
 - le paquet python3 est installé sur les 3 machines.
 
 ```bash
-
 yum install python3
-
 ```
 
 ### 2. Installer Ansible sous le control node.
@@ -60,58 +58,46 @@ yum install ansible-core
 ### 3. ajouter et configurer le 'remote user' sous les 3 machines.
 
 ```bash
-
 useradd ansible
 passwd ansible
-
 ```
 
 ```bash
-
 vim /etc/sudoers.d/ansible
 ansible     ALL=(ALL) 	NOPASSWD: ALL
-
 ```
 
 NB: avant de commencer, vous pouvez nommer les machines comme suit.
 
 ```bash
-
 vim /etc/hosts
 son@ip control-node1
 son@ip target-node1
 son@ip target-node2 
-
 ```
 
 ### 4. configurer la connexion ssh sans mot de passe depuis le control node en tant que remote user vers les 2 machines.
 
 ```bash
-
-ssh ansible@localhost
 ssh-keygen
 ls .ssh
-ssh-copy-id ansible@target-node1
-ssh-copy-id ansible@target-node2
-
+ssh-copy-id target-node1
+ssh-copy-id target-node2
 ```
 
 ### 5. ajouter le fichier inventaire sous le control node
 
 ```bash
-
 [group1]
 target-node1
 
 [group2]
 target-node2
-
 ```
 
 ### 6. ajouter le fichier ansible.cfg sous le control node
 
 ```bash
-
 [defaults]
 remote_user=ansible
 host_key_checking= false
@@ -122,22 +108,17 @@ become=true
 become_user= root
 become_method= sudo 
 become_ask_pass= False
-
 ```
 
 ### 7. tester la connexion ssh sans mot de passe en restant en tant que remote user
 
 ```bash
-
 ssh ansible@target-node1
-
 ```
 
 ### 8. tester la connexion ansible
 
 ```bash
-
 ansible target-node1 -m ping
-
 ```
 
