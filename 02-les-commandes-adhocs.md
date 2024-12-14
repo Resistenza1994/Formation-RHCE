@@ -8,7 +8,8 @@
 - `<hosts>` : Les hôtes sur lesquels la commande doit être exécutée. Cela peut être all ou un groupe d'hôtes défini dans votre fichier d'inventaire ou une adresse IP/un nom d'hôte spécifique.
 
 - `-m <module>` : Le module Ansible à utiliser pour exécuter la tâche. Par exemple, le module ping, shell, command, copy, etc.
-NB: Pour lister tous les modules
+
+- NB: Pour lister tous les modules
 
 ``` bash
 
