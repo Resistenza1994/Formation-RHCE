@@ -19,7 +19,6 @@ Dans cette méthode, nous définissons les variables directement dans le playboo
 Exemple 1 :
 
 ```bash
-
 - name: Ajouter utilisateur avec des variables définies
   hosts: all
   vars:
@@ -33,34 +32,26 @@ Exemple 1 :
         home: "{{ home_directory }}"
         shell: "{{ user_shell }}"
         state: present
-
 ```
 
 #### Utilisation de `vars_files`
 Dans cette méthode, nous stockons les variables dans un fichier séparé puis on fait l'appel de fichier dans la section `vars_files`
 
 ```bash
-
 vim variables.yml
-
 ```
 
 ```bash
-
 username: "alice"
 home_directory: "/home/alice"
 user_shell: "/bin/bash"
-
 ```
 
 ```bash
-
 vim playbook.yml
-
 ```
 
 ```bash
-
 - name: Ajouter utilisateur avec un fichier de variables
   hosts: all
   become: true
@@ -73,7 +64,6 @@ vim playbook.yml
         home: "{{ home_directory }}"
         shell: "{{ user_shell }}"
         state: present
-
 ```
 
 Variable magiques :
@@ -94,9 +84,7 @@ Exemple des variables magiques :
 Pour afficher les facts
 
 ```bash
-
 ansible node1 -m setup | less
-
 ```
 
 Lorsqu'un playbook Ansible est utilisé, il rassemble d'abord des faits sur tous les hôtes cibles.
@@ -119,7 +107,6 @@ Facts ansible les plus utilisés :
 Exemple 1: Playbook pour affichage de facts.
 
 ```bash 
-
 - name: Ansible Facts Playbook
   hosts: all
   tasks:
@@ -129,20 +116,17 @@ Exemple 1: Playbook pour affichage de facts.
   - name: Display Facts method2
     debug:
       var: ansible_facts['default_ipv4']['address']
-
 ```
 
 Exemple 2: Playbook pour affichage de facts.
 
 ```bash 
-
 - name: Ansible Facts Playbook
   hosts: all
   tasks:
   - name: Display ansible fact
     debug:
       var: ansible_hostname
-
 ```
 
 
