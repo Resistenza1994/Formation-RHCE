@@ -54,7 +54,6 @@ yum install python3
 ### 2. Installer Ansible sous le control node.
 
 ```bash
-
 yum install ansible-core
 ```
 
