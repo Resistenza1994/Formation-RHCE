@@ -20,6 +20,7 @@
 
 ## Syntaxe
 ```bash
+
 - name: Description du playbook
   hosts: [hôtes]
   become: [true/false]
@@ -37,9 +38,9 @@
 #### Q0. Utilisez un playbook Ansible pour ajouter un utilisateur nommé « alice » avec un shell /sbin/nologin et un home directory /host/alice sur toutes les machines hôtes, aussi pour modifier l'utilisateur « bob » afin que son shell soit /bin/bsh, son UID soit 2006, et son home directory soit /home/bob. 
 
 ``` bash
+
 - name: ajouter alice te modifier bob
   hosts: all
-  become: true
   tasks:
   - name: ajouter alice
     user:
@@ -65,25 +66,26 @@
   hosts: all
   become: true
   tasks:
-  - name: delete
+  - name: delete charlie
     user:
       name: charlie
       state: absent
+
 ```
 
-#### Q2. Utilisez un playbook Ansible pour installer le package httpd sur la machine hôte web-server, vérifier l'installation du package httpd sur toutes les machines hôtes en utilisant le module command et démarrer et activer ce service sur la machine hôte target-node1.
+#### Q2. Utilisez un playbook Ansible pour installer le package httpd sur toutes les machines hôtes, vérifier l'installation du package httpd en utilisant le module command, ensuite démarrer et activer ce service.
 
 
 ``` bash
-- name: install and strat service httpd
+
+- name: install and start service httpd
   hosts: all
-  become: true
   tasks:
   - name: install httpd
     yum:
       name: httpd
       state: latest
-  - name: start httpd
+  - name: start and enable httpd
     service:
       name: httpd
       state: started
@@ -91,25 +93,28 @@
 
 ```
 
-#### Q3. Utilisez un playbook Ansible pour ajouter une ligne au fichier /etc/hosts sur toutes les machines hôtes. La ligne à ajouter est '10.0.0.1 myserver'.
+#### Q3. Utilisez un playbook Ansible pour ajouter une ligne au fichier /etc/hosts sur toutes les machines hôtes. La ligne à ajouter est '10.10.10.100 myserver'.
 
 
 ``` bash
-hosts: all
-  become: true
+
+- name: add new line in /etc/hosts
+  hosts: all
   tasks:
-  - name: modifier ligne
+  - name: modified ligne
     lineinfile:
       path: /etc/hosts
-      line: 10.0.0.1 myserver
+      line: 10.10.10.100 myserver
+
 ```
 
-#### Q4. Utilisez un playbook Ansible pour copier un fichier nommé config.json depuis la machine de contrôle vers le répertoire /etc/myapp/ sur la machine app-server.
+#### Q4. Utilisez un playbook Ansible pour copier un fichier nommé /config.json depuis la machine de contrôle vers le répertoire /etc/myapp/ sur la machine app-server.
 
 
 ``` bash
-- hosts: all
-  become: true
+
+- name: copy /config.json file
+  hosts: all
   tasks:
   - name: créer répertoire /etc/myapp
     file:
@@ -117,15 +122,18 @@ hosts: all
       state: directory
   - name: copier fichier
     copy:
-      src: config.json
+      src: /config.json
       dest: /etc/myapp
+
 ```
 
-#### Q5. Utilisez un playbook Ansible pour créer un répertoire nommé /backup sur toutes les machines hôtes avec les permissions 0755, appartenant à l'utilisateur root et au groupe root.
+#### Q5. Utilisez un playbook Ansible pour créer un répertoire nommé /backup sur toutes les machines hôtes avec les permissions 755, appartenant à l'utilisateur root et au groupe root.
 
 
-``` bash 
-- hosts: all
+``` bash
+
+- name: create /backup file
+  hosts: all
   become: true
   tasks:
   - name: création répertoire
@@ -135,18 +143,20 @@ hosts: all
       mode: 755
       owner: root
       group: root
+
 ```
 
-### playbook avec plusieurs plays
+### Playbook avec plusieurs plays
 Un playbook Ansible peut contenir plusieurs "plays". Chaque "play" applique un ensemble de tâches à un groupe d'hôtes. Cela permet de structurer le playbook pour réaliser différentes phases d'une configuration ou d'un déploiement.  
 Exemple 1:  
 - play1: ajouter un utilisateur
 - play2: le modifier  
 NB: on utilise plusieurs plays pour qu'on puisse exécuter les plays dans différentes hotes `hosts`
+
 ```bash
+
 - name: play1 to add group and its user
   hosts: all
-  become: true
   tasks:
   - name: add the group
     group:
@@ -159,13 +169,15 @@ NB: on utilise plusieurs plays pour qu'on puisse exécuter les plays dans diffé
       group: group1
 - name: play2 to modify the user1
   hosts: all
-  become: true
   tasks:
   - name: modify
     user:
       name: user1
       uid: 4007
+
 ```
+
+
 
 Exemple 2:  
 1. Premier play : Créer un site web.
@@ -180,6 +192,7 @@ Exemple 2:
 </p>
 
 ```bash
+
 - hosts: all  
   become: true
   tasks:      
