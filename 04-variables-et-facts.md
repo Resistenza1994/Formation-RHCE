@@ -73,6 +73,7 @@ vim playbook.yml
         home: "{{ home_directory }}"
         shell: "{{ user_shell }}"
         state: present
+
 ```
 
 Variable magiques :
@@ -80,11 +81,11 @@ Les variables magiques sont des variables définies automatiquement par Ansible 
 Il n’est pas possible de modifier la valeur d’une variable magique. Elle sera réinitialisée toujours à la valeur par défaut.
 
 Exemple des variables magiques :
-hostvars ==> Contient tous les hôtes de l'inventaire et leurs variables assignées
-groups ==> Contient tous les groupes de l’inventaire
-Group_names ==> Les groupes dont cet hôte est actuellement membre
-Inventory_hostname ==> Spécifie le nom d'hôte d'inventaire pour l'hôte actuel
-Inventory_file ==> Spécifie le nom du fichier d'inventaire courant qui est utilisé
+Hostvars : Contient tous les hôtes de l'inventaire et leurs variables assignées
+Groups :Contient tous les groupes de l’inventaire
+Group_names : Les groupes dont cet hôte est actuellement membre
+Inventory_hostname : Spécifie le nom d'hôte d'inventaire pour l'hôte actuel
+Inventory_file : Spécifie le nom du fichier d'inventaire courant qui est utilisé
 
 
 
@@ -107,12 +108,12 @@ Pour désactiver la collecte des Faits, il faut utiliser le paramètre gather_fa
 
 Facts ansible les plus utilisés :
 
-Ansible_facts['hostname'] ==> Nom de machine
-Ansible_facts[‘ interfaces’] ==> La liste des interfaces réseau
-Ansible_facts[‘distribution_version’] ==> La version de la distribution actuelle
-ansible_facts[’default_ipv4’][’address’] ==> Adresse ipv4 de la machine
-Ansible_facts[‘devices’] ==> La liste des composants de stockage
-Ansible_facts[‘devices’][‘sda’][‘partitions’][‘sda1’][‘size’] ==> La taille de la partition sda1
+Ansible_facts['hostname'] : Nom de machine
+Ansible_facts[‘ interfaces’] : La liste des interfaces réseau
+Ansible_facts[‘distribution_version’] : La version de la distribution actuelle
+ansible_facts[’default_ipv4’][’address’] : Adresse ipv4 de la machine
+Ansible_facts[‘devices’] : La liste des composants de stockage
+Ansible_facts[‘devices’][‘sda’][‘partitions’][‘sda1’][‘size’] : La taille de la partition sda1
 
 
 Exemple 1: Playbook pour affichage de facts.
