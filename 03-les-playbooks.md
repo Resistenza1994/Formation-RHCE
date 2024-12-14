@@ -20,7 +20,6 @@
 
 ## Syntaxe
 ```bash
-
 - name: Description du playbook
   hosts: [hôtes]
   become: [true/false]
@@ -38,7 +37,6 @@
 #### Q0. Utilisez un playbook Ansible pour ajouter un utilisateur nommé « alice » avec un shell /sbin/nologin et un home directory /host/alice sur toutes les machines hôtes, aussi pour modifier l'utilisateur « bob » afin que son shell soit /bin/bsh, son UID soit 2006, et son home directory soit /home/bob. 
 
 ``` bash
-
 - name: ajouter alice te modifier bob
   hosts: all
   tasks:
@@ -55,13 +53,11 @@
       home: /home/bob
       shell: /bin/sh
       state: present
-
 ```
 
 #### Q1. Utilisez un playbook Ansible pour supprimer l'utilisateur « charlie » de toutes les machines hôtes.
 
 ``` bash
-
 - name: supprimer charlie
   hosts: all
   become: true
@@ -70,14 +66,12 @@
     user:
       name: charlie
       state: absent
-
 ```
 
 #### Q2. Utilisez un playbook Ansible pour installer le package httpd sur toutes les machines hôtes, vérifier l'installation du package httpd en utilisant le module command, ensuite démarrer et activer ce service.
 
 
 ``` bash
-
 - name: install and start service httpd
   hosts: all
   tasks:
@@ -90,14 +84,12 @@
       name: httpd
       state: started
       enabled: yes
-
 ```
 
 #### Q3. Utilisez un playbook Ansible pour ajouter une ligne au fichier /etc/hosts sur toutes les machines hôtes. La ligne à ajouter est '10.10.10.100 myserver'.
 
 
 ``` bash
-
 - name: add new line in /etc/hosts
   hosts: all
   tasks:
@@ -105,14 +97,12 @@
     lineinfile:
       path: /etc/hosts
       line: 10.10.10.100 myserver
-
 ```
 
 #### Q4. Utilisez un playbook Ansible pour copier un fichier nommé /config.json depuis la machine de contrôle vers le répertoire /etc/myapp/ sur la machine app-server.
 
 
 ``` bash
-
 - name: copy /config.json file
   hosts: all
   tasks:
@@ -124,14 +114,12 @@
     copy:
       src: /config.json
       dest: /etc/myapp
-
 ```
 
 #### Q5. Utilisez un playbook Ansible pour créer un répertoire nommé /backup sur toutes les machines hôtes avec les permissions 755, appartenant à l'utilisateur root et au groupe root.
 
 
 ``` bash
-
 - name: create /backup file
   hosts: all
   become: true
@@ -143,7 +131,6 @@
       mode: 755
       owner: root
       group: root
-
 ```
 
 ### Playbook avec plusieurs plays
@@ -154,7 +141,6 @@ Exemple 1:
 NB: on utilise plusieurs plays pour qu'on puisse exécuter les plays dans différentes hotes `hosts`
 
 ```bash
-
 - name: play1 to add group and its user
   hosts: all
   tasks:
@@ -174,7 +160,6 @@ NB: on utilise plusieurs plays pour qu'on puisse exécuter les plays dans diffé
     user:
       name: user1
       uid: 4007
-
 ```
 
 
