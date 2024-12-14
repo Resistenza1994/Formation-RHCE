@@ -81,11 +81,11 @@ Les variables magiques sont des variables définies automatiquement par Ansible 
 Il n’est pas possible de modifier la valeur d’une variable magique. Elle sera réinitialisée toujours à la valeur par défaut.
 
 Exemple des variables magiques :
-Hostvars : Contient tous les hôtes de l'inventaire et leurs variables assignées
-Groups :Contient tous les groupes de l’inventaire
-Group_names : Les groupes dont cet hôte est actuellement membre
-Inventory_hostname : Spécifie le nom d'hôte d'inventaire pour l'hôte actuel
-Inventory_file : Spécifie le nom du fichier d'inventaire courant qui est utilisé
+- Hostvars : Contient tous les hôtes de l'inventaire et leurs variables assignées
+- Groups :Contient tous les groupes de l’inventaire
+- Group_names : Les groupes dont cet hôte est actuellement membre
+- Inventory_hostname : Spécifie le nom d'hôte d'inventaire pour l'hôte actuel
+- Inventory_file : Spécifie le nom du fichier d'inventaire courant qui est utilisé
 
 
 
